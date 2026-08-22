@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charleston &amp; Mount Pleasant — Dining &amp; Discovery Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4ede0;
+    --paper-deep: #ebe2d0;
+    --ink: #2a2620;
+    --ink-soft: #5a5247;
+    --accent: #8b3a2f;          /* Charleston brick */
+    --accent-deep: #5e2820;
+    --gold: #a98a47;             /* Antique brass */
+    --rule: #b8a886;
+    --shadow: rgba(60, 40, 20, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(169, 138, 71, 0.08), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(139, 58, 47, 0.06), transparent 60%);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.55;
+    min-height: 100vh;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* Subtle paper texture using a layered gradient */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(60,40,20,0.012) 2px, rgba(60,40,20,0.012) 3px);
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    text-align: center;
+    padding: 2rem 0 3rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+    margin-top: 0.75rem;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    color: var(--gold);
+  }
+
+  .ornament::before,
+  .ornament::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: var(--rule);
+  }
+
+  .ornament-mark {
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+  }
+
+  .curated {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+  }
+
+  /* ============ LEGEND ============ */
+  .legend {
+    display: inline-flex;
+    gap: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--rule);
+    margin: 1.5rem auto 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+
+  .legend-item { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .badge.res {
+    background: var(--accent);
+    color: var(--paper);
+  }
+
+  .badge.walk {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-mark {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .subsection-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin: 1.75rem 0 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ LISTINGS ============ */
+  .listings {
+    list-style: none;
+  }
+
+  .listing {
+    padding: 1.1rem 0;
+    border-bottom: 1px dotted var(--rule);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .listing:last-child { border-bottom: none; }
+
+  .listing-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-top: 0.4rem;
+    min-width: 50px;
+  }
+
+  .listing-content { }
+
+  .listing-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+
+  .listing-name a {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(to right, var(--accent), var(--accent));
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s ease, color 0.2s ease;
+    padding-bottom: 2px;
+  }
+
+  .listing-name a:hover {
+    color: var(--accent);
+    background-size: 100% 1px;
+  }
+
+  .listing-name a::after {
+    content: ' ↗';
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7em;
+    color: var(--gold);
+    opacity: 0.6;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .listing-name a:hover::after {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
+  .listing-desc {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .insider-tip {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--accent-deep);
+    font-style: normal;
+    letter-spacing: 0.02em;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  .insider-tip::before {
+    content: '✦ ';
+    color: var(--gold);
+  }
+
+  /* ============ MICHELIN STAR FEATURED LISTING ============ */
+  .listing.starred {
+    background: linear-gradient(180deg, rgba(169, 138, 71, 0.10), rgba(169, 138, 71, 0.03));
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    margin: 0.5rem 0;
+    position: relative;
+  }
+
+  .listing.starred .listing-name a {
+    background-image: linear-gradient(to right, var(--gold), var(--gold));
+  }
+
+  .michelin-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    background: var(--gold);
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 0.6rem;
+    border-radius: 2px;
+  }
+
+  .michelin-banner .star {
+    font-size: 0.85rem;
+    letter-spacing: 0;
+  }
+
+  /* ============ WALKS GRID ============ */
+  .walks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .walk-card {
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid var(--rule);
+    padding: 1.25rem 1.25rem 1.1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .walk-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px var(--shadow);
+  }
+
+  .walk-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .walk-desc {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .farewell {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.4;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .signature strong {
+    font-weight: 600;
+    color: var(--accent-deep);
+    letter-spacing: 0.15em;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 600px) {
+    body { padding: 1.5rem 1rem 3rem; font-size: 17px; }
+    .legend { flex-direction: column; gap: 0.5rem; padding: 0.75rem 1rem; }
+    .listing { grid-template-columns: 1fr; gap: 0.4rem; }
+    .listing-badges { flex-direction: row; padding-top: 0; }
+    .ornament::before, .ornament::after { width: 30px; }
+  }
+
+  @media print {
+    body { background: white; padding: 1rem; }
+    body::before { display: none; }
+    .listing-name a { color: var(--ink); }
+    .listing-name a::after { content: ''; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="eyebrow">A Lowcountry Welcome</div>
+    <h1>Charleston &amp; <em>Mount Pleasant</em></h1>
+    <div class="ornament">
+      <span class="ornament-mark">⌘ &nbsp; ✦ &nbsp; ⌘</span>
+    </div>
+    <p class="subtitle">Dining &amp; Discovery Guide for Wedding Guests</p>
+    <div class="legend">
+      <span class="legend-item"><span class="badge res">RES</span> Reservations Recommended</span>
+      <span class="legend-item"><span class="badge walk">WIN</span> Walk In &amp; Wait</span>
+    </div>
+  </header>
+
+  <!-- ============ BREAKFAST ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Breakfast</h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">I.</span>
+    </div>
+
+    <div class="subsection-label">Charleston</div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://millersallday.com/" target="_blank" rel="noopener">Miller's All Day</a></div>
+          <div class="listing-desc">Modern Southern breakfast &amp; brunch on King Street.
+            <span class="insider-tip">Don't miss the cinnamon roll.</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="subsection-label">Mount Pleasant</div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://pagesokragrill.com/" target="_blank" rel="noopener">Page's Okra Grill</a></div>
+          <div class="listing-desc">Classic Lowcountry &amp; Southern breakfast &amp; brunch.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://posthouseinn.com/" target="_blank" rel="noopener">Post House Inn</a></div>
+          <div class="listing-desc">Upscale coastal tavern &amp; inn in Old Village — MICHELIN Key winner.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://graceandgritsc.com/" target="_blank" rel="noopener">Grace &amp; Grit</a></div>
+          <div class="listing-desc">Southern comfort food, fresh seafood &amp; famous grit flight.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ LUNCH & DINNER — BEACHES ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Lunch &amp; Dinner <em style="font-style:italic; color:var(--ink-soft); font-size:0.7em;">— The Beaches</em></h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">II.</span>
+    </div>
+
+    <div class="subsection-label">Sullivan's Island</div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://theobstinatedaughter.com/" target="_blank" rel="noopener">The Obstinate Daughter</a></div>
+          <div class="listing-desc">Coastal Southern &amp; Italian-inspired; wood-fired pizza &amp; Lowcountry fare.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://mex1coastalcantina.com/" target="_blank" rel="noopener">Mex 1 Coastal Cantina</a></div>
+          <div class="listing-desc">Modern Mexican &amp; tacos with a beach vibe.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://hometeambbq.com/" target="_blank" rel="noopener">Home Team BBQ</a></div>
+          <div class="listing-desc">Casual BBQ, great wings &amp; game-day atmosphere.</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="subsection-label">Isle of Palms</div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.islander71.com/" target="_blank" rel="noopener">Islander 71</a></div>
+          <div class="listing-desc">Casual waterfront dining on the Intracoastal Waterway, known for crab cakes.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.codadelpesce.com/" target="_blank" rel="noopener">Coda del Pesce</a></div>
+          <div class="listing-desc">Upscale oceanfront Italian seafood restaurant.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ LUNCH & DINNER — MOUNT PLEASANT ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Lunch &amp; Dinner <em style="font-style:italic; color:var(--ink-soft); font-size:0.7em;">— Mount Pleasant</em></h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">III.</span>
+    </div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://nicooystersandseafood.com/" target="_blank" rel="noopener">NICO Oysters + Seafood</a></div>
+          <div class="listing-desc">French-inspired seafood &amp; oyster bar on Shem Creek.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://langdonsrestaurant.com/" target="_blank" rel="noopener">Langdon's Restaurant &amp; Wine Bar</a></div>
+          <div class="listing-desc">Upscale Lowcountry &amp; global fare — Mt. Pleasant's only AAA Four Diamond restaurant.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://woodandgrainmtp.com/" target="_blank" rel="noopener">Wood &amp; Grain</a></div>
+          <div class="listing-desc">Casual salads, pizza &amp; wood-fired favorites.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://tierraalmar.com/" target="_blank" rel="noopener">Tierra al Mar</a></div>
+          <div class="listing-desc">Modern Latin American cuisine &amp; cocktails.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://tysroadsidecoastalkitchen.com/" target="_blank" rel="noopener">Ty's Roadside Coastal Kitchen</a></div>
+          <div class="listing-desc">Casual comfort food &amp; coastal seafood.
+            <span class="insider-tip">Don't miss the meatballs and Parmesan grits. Trust me.</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ LUNCH & DINNER — CHARLESTON ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Lunch &amp; Dinner <em style="font-style:italic; color:var(--ink-soft); font-size:0.7em;">— Charleston</em></h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">IV.</span>
+    </div>
+    <ul class="listings">
+      <li class="listing starred">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="michelin-banner"><span class="star">★</span> One Michelin Star · 2025</div>
+          <div class="listing-name"><a href="https://www.malagonchs.com/" target="_blank" rel="noopener">Malagón Mercado y Taperia</a></div>
+          <div class="listing-desc">Intimate Spanish taperia — one of only three Charleston restaurants awarded a star in the inaugural MICHELIN Guide American South.
+            <span class="insider-tip">Reservations essential. Try the fried rabbit and la bomba de la Barceloneta.</span>
+          </div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://167raw.com/" target="_blank" rel="noopener">167 Raw</a></div>
+          <div class="listing-desc">Popular oyster bar &amp; seafood spot.
+            <span class="insider-tip">The lobster roll is a must.</span>
+          </div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.167sushibar.com/" target="_blank" rel="noopener">167 Sushi Bar</a></div>
+          <div class="listing-desc">High-end sushi &amp; Japanese-inspired small plates.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.bar167.com/" target="_blank" rel="noopener">Bar 167</a></div>
+          <div class="listing-desc">Stylish Mediterranean-inspired cocktail bar with upscale small plates &amp; raw bar.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.eatatfig.com/" target="_blank" rel="noopener">F.I.G.</a></div>
+          <div class="listing-desc">Iconic farm-to-table restaurant — James Beard Award winners.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://allorachs.com/" target="_blank" rel="noopener">Allora</a></div>
+          <div class="listing-desc">Elegant coastal Italian with rooftop terrace &amp; gelato window.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://lefarfallecharleston.com/" target="_blank" rel="noopener">Le Farfalle</a></div>
+          <div class="listing-desc">Handmade pasta &amp; classic Italian in Harleston Village.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://felixchs.com/" target="_blank" rel="noopener">Félix Cocktails et Cuisine</a></div>
+          <div class="listing-desc">Modern French bistro with exceptional cocktails on King Street.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.littlejackstavern.com/" target="_blank" rel="noopener">Little Jack's Tavern</a></div>
+          <div class="listing-desc">Classic American tavern — one of Charleston's best burgers.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ DRINKS ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Drinks <em style="font-style:italic; color:var(--ink-soft); font-size:0.7em;">— Charleston</em></h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">V.</span>
+    </div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://huskrestaurant.com/" target="_blank" rel="noopener">Bar at Husk</a></div>
+          <div class="listing-desc">Historic carriage house bar behind Husk — elevated Southern cocktails &amp; bourbon.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://theginjoint.com/" target="_blank" rel="noopener">The Gin Joint</a></div>
+          <div class="listing-desc">Intimate craft cocktail bar; try the legendary "Bartender's Choice."</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://bin152.com/" target="_blank" rel="noopener">Bin 152</a></div>
+          <div class="listing-desc">Cozy wine &amp; cheese bar with European vibe on King Street.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.seahorsechs.com/" target="_blank" rel="noopener">Seahorse</a></div>
+          <div class="listing-desc">Seasonal cocktail bar &amp; supper club with a nautical speakeasy feel.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge res">Res</span><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.bythewaychs.com/" target="_blank" rel="noopener">By The Way</a></div>
+          <div class="listing-desc">Neighborhood late-night cocktail bar &amp; tavern just off King Street — open until 2 AM.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ ROOFTOPS ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Rooftops <em style="font-style:italic; color:var(--ink-soft); font-size:0.7em;">— Charleston</em></h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">VI.</span>
+    </div>
+    <ul class="listings">
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.thedewberrycharleston.com/eat-and-drink/citrus-club/" target="_blank" rel="noopener">The Citrus Club</a></div>
+          <div class="listing-desc">Atop The Dewberry — highest rooftop in the city, best panoramic views.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.thevendue.com/rooftop-bar" target="_blank" rel="noopener">The Vendue Rooftop</a></div>
+          <div class="listing-desc">Charleston's original rooftop bar — panoramic harbor &amp; skyline views.</div>
+        </div>
+      </li>
+      <li class="listing">
+        <div class="listing-badges"><span class="badge walk">Win</span></div>
+        <div class="listing-content">
+          <div class="listing-name"><a href="https://www.thenickelhotel.com/rosemary-rose/" target="_blank" rel="noopener">Rosemary Rose</a></div>
+          <div class="listing-desc">French Riviera–inspired rooftop at The Nickel Hotel — cocktails &amp; King Street views.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ WALKS & STROLLS ============ -->
+  <section>
+    <div class="section-header">
+      <h2>Walks &amp; Strolls</h2>
+      <div class="section-rule"></div>
+      <span class="section-mark">VII.</span>
+    </div>
+
+    <div class="subsection-label">Charleston</div>
+    <div class="walks-grid">
+      <div class="walk-card">
+        <div class="walk-name">The Battery</div>
+        <div class="walk-desc">Historic seawall lined with famous antebellum homes.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">Rainbow Row</div>
+        <div class="walk-desc">Charleston's iconic stretch of pastel historic homes.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">Waterfront Park</div>
+        <div class="walk-desc">Beloved harborfront park with the Pineapple Fountain.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">The Cooper</div>
+        <div class="walk-desc">New luxury waterfront hotel on the harbor — upscale dining &amp; resort-style atmosphere.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">American Gardens</div>
+        <div class="walk-desc">Beautiful, peaceful park in the heart of busy King Street.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">King Street</div>
+        <div class="walk-desc">Main downtown street for shopping, dining &amp; nightlife.</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Mount Pleasant</div>
+    <div class="walks-grid">
+      <div class="walk-card">
+        <div class="walk-name">Shem Creek</div>
+        <div class="walk-desc">Waterfront boardwalk with bars, restaurants &amp; sunset views.</div>
+      </div>
+      <div class="walk-card">
+        <div class="walk-name">Pitt Street Bridge</div>
+        <div class="walk-desc">Scenic walking pier — perfect for sunset and harbor views.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="farewell">Wishing you a warm welcome to the Lowcountry —<br>happy exploring, and see you New Year's Eve.</p>
+    <div class="ornament">
+      <span class="ornament-mark">✦</span>
+    </div>
+    <p class="signature">Curated by <strong>Jeff &amp; Christine DeLong</strong></p>
+  </footer>
+
+</div>
+</body>
+</html>
